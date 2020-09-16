@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)https://emilbaehr.github.io/automatic-app-landing-page/ -->
 <html lang="en-us">
 
 <head>
@@ -14,7 +13,6 @@
     <!-- Smart App Banner -->
     <meta name="apple-itunes-app" content="app-id=1234793120">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
@@ -253,66 +251,6 @@
                         <a href="https://emilbaehr.com/">Press Kit</a>
                     </div> -->
                 </footer>
-                <script src="./assets/jquery.min.js"></script>
-                <script>
-                    $(function ()
-                    {
-                        var apiURL = "https://itunes.apple.com/lookup?id=1234793120&callback=?";
-                        $.getJSON(apiURL, function (json)
-                        {
-                            if (json.results && json.results.length)
-                            {
-                                console.info("Image strings loaded from Apple API.");
-                                var appInfo = json.results[0];
-                                // Set favicon
-                                //$('link[rel="shortcut icon"]').attr("href", appInfo.artworkUrl512);
-                                // Set page title using the iOS app ID if it is not set manually in _config.yml
-                                var $pageTitle = $(".pageTitle");
-                                if ($.trim($($pageTitle).text()).length == 0)
-                                {
-                                    $($pageTitle).html(appInfo.trackName);
-                                }
-                                // Set large app icon using the iOS app ID if it is not set manually in _config.yml
-                                var $appIconLarge = $(".appIconLarge");
-                                if (!$appIconLarge.attr('src'))
-                                {
-                                    $($appIconLarge).attr("src", appInfo.artworkUrl512);
-                                }
-                                // Set header app icon using the iOS app ID if it is not set manually in _config.yml
-                                var $appIconHeader = $(".headerIcon");
-                                if (!$appIconHeader.attr('src'))
-                                {
-                                    $($appIconHeader).attr("src", appInfo.artworkUrl512);
-                                }
-                                // Set app name using the iOS app ID if it is not set manually in _config.yml
-                                var $appName = $(".appName");
-                                if ($.trim($($appName).text()).length == 0)
-                                {
-                                    $($appName).html(appInfo.trackName);
-                                }
-                                // Set the name displayed in the header if it is not set manually in _config.yml
-                                var $headerName = $(".headerName");
-                                if ($.trim($($headerName).text()).length == 0)
-                                {
-                                    $($headerName).html(appInfo.trackName);
-                                }
-                                // Set price using the iOS app ID if it is not set manually in _config.yml
-                                var $appPrice = $(".appPrice");
-                                if ($.trim($($appPrice).text()).length == 0)
-                                {
-                                    $($appPrice).html(appInfo.formattedPrice);
-                                }
-                                // Set App Store link using the iOS app ID if it is not set manually in _config.yml
-                                var $appStoreLink = $(".appStoreLink");
-                                if ($.trim($appStoreLink.attr('href')).length == 0)
-                                {
-                                    $($appStoreLink).attr("href", appInfo.trackViewUrl);
-                                }
-                                console.info(appInfo);
-                            }
-                        });
-                    });
-                </script>
             </div>
         </div>
     </div>
