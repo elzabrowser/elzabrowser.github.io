@@ -1,10 +1,11 @@
 html {
   font-size: 62.5%;
-  font-family: Algerian;
   line-height: 1;
 }
 body {
   font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 5%;
   background-color: #fff;
 }
 .subPageBody {
@@ -14,7 +15,7 @@ h1 {
   font-size: 3rem;
 }
 h2 {
-  font-size: 2rem;
+  font-size: 18px;
 }
 h3 {
   font-size: 2rem;
@@ -41,7 +42,7 @@ a:active {
   padding: 0;
 }
 .imageWrapper {
-  height: 714px;
+  height: 600px;
   background: linear-gradient(rgba(29, 31, 32, 0.7), rgba(0, 0, 0, 0.9)),
     url('./d1.jpg');
   background-repeat: no-repeat;
@@ -104,6 +105,9 @@ header {
   display: flex;
   margin-right: -15px;
 }
+.headerName {
+  font-weight: 500;
+}
 .logo {
   display: flex;
   justify-content: flex-start;
@@ -112,11 +116,13 @@ header {
   margin-right: 30px;
 }
 .logo > p {
+  font-size: 18px;
   color: #fff;
   white-space: nowrap;
   display: flex;
-  font-weight: bold;
+  font-weight: 500;
   margin-left: 15px;
+  margin-bottom: 0;
 }
 @media only screen and (max-width: 768px) {
   .logo {
@@ -210,7 +216,7 @@ nav > ul li a:active {
   grid-area: i;
   display: flex;
   flex-wrap: wrap;
-  padding-top: 90px;
+  padding-top: 67px;
   align-content: flex-start;
 }
 @media only screen and (max-width: 992px) {
@@ -240,10 +246,15 @@ nav > ul li a:active {
 }
 .appName {
   color: #fff;
+  font-weight: 500;
+  font-size: 30px;
+  margin-bottom: 0;
 }
 .appPrice {
   color: #fff;
-  font-weight: normal;
+  font-weight: 300;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 @media only screen and (max-width: 768px) {
   .appNamePriceContainer {
@@ -253,17 +264,20 @@ nav > ul li a:active {
     justify-content: center;
   }
   .appName {
+    font-size: 30px;
     margin-top: 30px;
     text-align: center;
   }
   .appPrice {
     margin-top: 13px;
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 0;
   }
 }
 .appDescriptionContainer {
   font-size: 1.8rem;
-  font-weight: 200;
+  font-weight: 100;
   width: 100%;
   align-items: flex-start;
   margin-top: 45px;
@@ -279,12 +293,17 @@ nav > ul li a:active {
   line-height: 1.5;
 }
 .appDescription {
+  font-size: 22px;
   color: #fff;
+  font-weight: 300;
   /*   text-align: center;
  */
 }
 @media only screen and (max-width: 992px) {
   .appDescription {
+    font-size: 18px;
+    font-weight: 300;
+
     text-align: center;
   }
   .earlyaccess {
@@ -331,6 +350,7 @@ nav > ul li a:active {
 .iphoneScreen {
   width: 100%;
   margin-right: 30px;
+  margin-top: 30px;
 }
 .videoContainer {
   width: 349px;
@@ -435,6 +455,7 @@ nav > ul li a:active {
   color: #666;
   margin-top: 8px;
   line-height: 1.5;
+  font-weight: 300;
 }
 @media only screen and (max-width: 992px) {
   .features {
@@ -502,11 +523,11 @@ footer {
   line-height: 1.5;
   width: 100%;
   text-align: center;
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .footerIcons {
-  padding-bottom: 70px;
+  padding-bottom: 30px;
   display: flex;
   flex: 0 0 100%;
   justify-content: center;
@@ -557,7 +578,7 @@ footer {
 
 .download {
   color: #c6cbd1;
-  width: 200px;
+  width: 100px;
   height: 50px;
   font-size: 25px;
   border-radius: 7px;
@@ -572,21 +593,25 @@ footer {
 .search-box {
   background-color: transparent;
   outline: none;
-  height: 35px;
-  font-size: 15px;
+  height: 30px;
+  font-size: 12px;
   border: 0;
   width: 100%;
   letter-spacing: 2px;
+  padding-left: 10px;
 }
 .search-button {
+  font-weight: 100;
+  font-size: 12px;
   position: absolute;
   right: 4px;
   top: 4px;
+  letter-spacing: 2px;
   background-color: rgb(0, 0, 0);
   border-radius: 50px;
   border: 0;
   color: #fff;
   width: 130px;
-  height: 33px;
+  height: 32px;
   outline: 0;
 }
