@@ -44,7 +44,7 @@ a:active {
 .imageWrapper {
   height: 600px;
   background: linear-gradient(rgba(29, 31, 32, 0.7), rgba(0, 0, 0, 0.9)),
-    url('./d1.jpg');
+    url('../background.webp');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
