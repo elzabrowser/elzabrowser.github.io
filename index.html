@@ -100,19 +100,42 @@
                                 UP FOR EARLY
                                 ACCESS
                             </p>
-                            <div class="search-container">
-                                <input v-model="email" type="text" style="font-weight: 400;" class="search-box"
-                                    placeholder="EMAIL ADDRESS">
+                            <div class="search-container" v-bind:class="{ emailerror: failemailvalidation }">
+                                <input v-model="email" type="text" style="font-weight: 400;font-size: 13px;"
+                                    class="search-box" placeholder="EMAIL ADDRESS">
                                 <button v-on:click="submit" style="font-weight: 400;" class="search-button">GET
                                     ELZA</button>
                             </div>
                         </div>
-                        <button v-if="signedUp=='yes'" class="btn btn-dark download"><i
-                                class="far fa-arrow-alt-circle-down"></i>
-                            Windows</button>
-                        <button v-if="signedUp=='yes'" class="btn btn-dark download"><i
-                                class="far fa-arrow-alt-circle-down"></i>
-                            Linux</button>
+                        <div v-if="signedUp=='yes'" class="text-center">
+                            <p class="earlyaccess"
+                                style="color: floralwhite;letter-spacing: 3px;font-size: 12px;font-weight: 400;text-align: center;">
+                                DOWNLOAD FOR
+                            </p>
+
+                            <a href="http://speedtest.tele2.net/1MB.zip" target="_self"
+                                class="btn btn-dark download border-0 bg-transparent"><i class="fab fa-windows">
+                                    <p class="os">
+                                        WINDOWS
+                                    </p>
+                                </i>
+                            </a>
+
+                            <a href="http://speedtest.tele2.net/1MB.zip" target="_self"
+                                class="btn btn-dark download border-0 bg-transparent"><i class="fab fa-linux">
+                                    <p class="os">
+                                        LINUX
+                                    </p>
+                                </i>
+                            </a>
+                            <a class="btn btn-dark download border-0 bg-transparent"><i class="fab fa-apple"
+                                    style="color: rgb(100, 100, 100);">
+                                    <p class="os" style="color: rgb(100, 100, 100);">
+                                        MAC
+                                    </p>
+                                </i>
+                            </a>
+                        </div>
                     </div>
 
                 </div>
@@ -264,17 +287,37 @@
             el: '#app',
             data: {
                 signedUp: "no",
-                email: ""
+                email: "",
+                failemailvalidation: false
             },
             methods: {
                 submit: function ()
                 {
-                    this.signedUp = "sending"
+                    if (!this.validateEmail(this.email))
+                    {
+                        this.failemailvalidation = true
+                        setTimeout(() =>
+                        {
+                            this.failemailvalidation = false
+
+                        }, 3000);
+                        return
+                    }
+                    this.signedUp = 'yes'
                     let s = new Date().toLocaleString();
-                    fetch('https://script.google.com/macros/s/AKfycbznKPSx8hUuxH67kTso_P7ugZNcFgd7IHgIh-DK-GdklaZFfUlH/exec?email=' + this.email + '&timestamp=' + s)
+                    fetch('https://script.google.com/macros/s/AKfycbwCl_OqSLgsJB2qPFqsKezvnVeuNHfgYGe_UILBRsBj7Gc3joA/exec?email=' + this.email + '&timestamp=' + s)
                         .then(stream => stream.json())
-                        .then(data => { this.signedUp = 'yes'; this.items = data })
+                        .then(data => { })
                         .catch(error => console.error(error))
+                    let os = this.getOS()
+                    if (os == "Windows")
+                    {
+                        window.location = 'http://speedtest.tele2.net/10MB.zip';
+
+                    } else if (os == "Linux")
+                    {
+                        window.location = 'http://speedtest.tele2.net/1MB.zip';
+                    }
                 },
                 getOS: function ()
                 {
@@ -302,6 +345,11 @@
                         os = 'Linux';
                     }
                     return os;
+                },
+                validateEmail: function (email)
+                {
+                    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(String(email).toLowerCase());
                 }
             }
         })

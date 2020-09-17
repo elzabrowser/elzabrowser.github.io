@@ -219,6 +219,11 @@ nav > ul li a:active {
   padding-top: 67px;
   align-content: flex-start;
 }
+@media only screen and (min-width: 992px) {
+  .appInfo {
+    padding-left: 20px;
+  }
+}
 @media only screen and (max-width: 992px) {
   .appInfo {
     padding-top: 50px;
@@ -577,7 +582,7 @@ footer {
 /*****************************************/
 
 .download {
-  color: #c6cbd1;
+  color: #c6cbd1 !important;
   width: 100px;
   height: 50px;
   font-size: 25px;
@@ -587,8 +592,12 @@ footer {
 .search-container {
   background-color: #fff;
   position: relative;
-  border-radius: 30px;
+  border-radius: 34px;
   padding: 3px 50px 3px 10px;
+  border: 0px solid red;
+}
+.emailerror {
+  border: 2px solid red;
 }
 .search-box {
   background-color: transparent;
@@ -599,6 +608,7 @@ footer {
   width: 100%;
   letter-spacing: 2px;
   padding-left: 10px;
+  padding-right: 110px;
 }
 .search-button {
   font-weight: 100;
@@ -614,4 +624,13 @@ footer {
   width: 130px;
   height: 32px;
   outline: 0;
+}
+.os {
+  color: floralwhite;
+  letter-spacing: 1px;
+  font-size: 10px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 3px;
+  font-family: 'Roboto';
 }
