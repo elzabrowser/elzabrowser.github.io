@@ -146,7 +146,7 @@
                         <div>
                             <span class="fa-stack fa-1x">
                                 <i class="iconBack fas fa-circle fa-stack-2x"></i>
-                                <i class="iconTop fas fa-user-shield fa-stack-1x"></i>
+                                <i class="iconTop fas fa-mask fa-stack-1x"></i>
                             </span>
                         </div>
                         <div class="featureText">
@@ -162,7 +162,7 @@
                         <div>
                             <span class="fa-stack fa-1x">
                                 <i class="iconBack fas fa-circle fa-stack-2x"></i>
-                                <i class="iconTop fas fa-mask fa-stack-1x"></i>
+                                <i class="iconTop fas fa-ghost fa-stack-1x"></i>
                             </span>
                         </div>
                         <div class="featureText">
@@ -185,9 +185,8 @@
                                 Trackers
                             </h3>
                             <p>
-                                Unlike other browsers, we haven’t planted any trackers to monitor your activity and also
-                                allow you to defend against trackers and ads targeted at you.
-                            </p>
+                                Unlike other browsers, we haven’t planted trackers to monitor your activity and allow
+                                you to defend against targeted trackers, ads etc. </p>
                         </div>
                     </div>
                     <div class="feature">
@@ -210,7 +209,7 @@
                         <div>
                             <span class="fa-stack fa-1x">
                                 <i class="iconBack fas fa-circle fa-stack-2x"></i>
-                                <i class="iconTop fas fa-shield-alt fa-stack-1x"></i>
+                                <i class="iconTop fas fa-user-shield fa-stack-1x"></i>
                             </span>
                         </div>
                         <div class="featureText">
@@ -308,7 +307,7 @@
                     }
                     this.signedUp = 'yes'
                     let s = new Date().toLocaleString();
-                    fetch('https://script.google.com/macros/s/AKfycbwCl_OqSLgsJB2qPFqsKezvnVeuNHfgYGe_UILBRsBj7Gc3joA/exec?email=' + this.email + '&timestamp=' + s)
+                    fetch('https://script.google.com/macros/s/AKfycbymVvmCCU_RE3EYickoB18gHAvCYH7xLw5OicA0HjHQciPn8V4/exec?email=' + this.email + '&timestamp=' + s)
                         .then(stream => stream.json())
                         .then(data =>
                         {

@@ -4,7 +4,6 @@ html {
 }
 body {
   font-size: 2rem;
-  font-family: 'Roboto', sans-serif;
   letter-spacing: 5%;
   background-color: #fff;
 }
@@ -107,6 +106,7 @@ header {
 }
 .headerName {
   font-weight: 500;
+  letter-spacing: 1px;
 }
 .logo {
   display: flex;
@@ -528,7 +528,7 @@ footer {
   line-height: 1.5;
   width: 100%;
   text-align: center;
-  padding-top: 30px;
+  padding-top: 50px;
   padding-bottom: 30px;
 }
 .footerIcons {
