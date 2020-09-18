@@ -442,7 +442,7 @@ nav > ul li a:active {
   color: #e6e6e6;
 }
 .iconTop {
-  color: #1d63ea;
+  color: #000000;
 }
 .socialIconBack {
   color: #e6e6e6;
@@ -538,12 +538,10 @@ footer {
   justify-content: center;
 }
 .footerLinks {
-  display: flex;
   text-align: center;
   padding-bottom: 70px;
 }
 .footerLinks a {
-  margin-right: 30px;
 }
 .footerLinks a:last-child {
   margin-right: 0px;

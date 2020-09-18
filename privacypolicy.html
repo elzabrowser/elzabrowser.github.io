@@ -1,31 +1,379 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html style lang="en-us">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base target="_blank">
-
-    <title class="pageTitle"></title>
+    <title class="pageTitle">Elza Browser</title>
     <meta name="description" content="Write a short tagline for your app.">
-
-    <link rel="shortcut icon" href="">
-
     <!-- Smart App Banner -->
-
     <meta name="apple-itunes-app" content="app-id=1234793120">
-
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/styles/main.css">
     <style>
-        h4 {
-            margin-bottom: 5px;
-            margin-top: 10px;
+        @keyframes fa-spin {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(1turn)
+            }
         }
     </style>
+    <style></style>
+    <style></style>
+    <style>
+        html {
+            font-size: 62.5%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1
+        }
+
+        body {
+            font-size: 2rem
+        }
+
+        .subPageBody {
+            background-color: #fff
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        a:link,
+        a:hover,
+        a:visited,
+        a:active {
+            color: #1d63ea;
+            text-decoration: none
+        }
+
+        *,
+        *::before,
+        *::after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        .headerBackground {
+            height: 115px
+        }
+
+        @media only screen and (max-width:768px) {
+            .headerBackground {
+                height: 80px
+            }
+        }
+
+        .subPageHeaderBackground {
+            background-color: #fff
+        }
+
+        .container {
+            display: grid;
+            margin: auto;
+            max-width: 1170px;
+            padding-left: 15px;
+            padding-right: 15px;
+            grid-template-columns: repeat(12, 1fr);
+            grid-column-gap: 30px;
+            grid-template-areas: "h h h h h h h h h h h h""p p p p p i i i i i i i""c c c c c c c c c c c c""f f f f f f f f f f f f"
+        }
+
+        .subPageContainer {
+            grid-template-rows: 115px auto auto auto;
+            background-color: #fff
+        }
+
+        @media only screen and (max-width:768px) {
+            .container {
+                grid-template-rows: 80px 811px auto auto
+            }
+        }
+
+        @media only screen and (max-width:992px) {
+            .container {
+                grid-column-gap: 0px;
+                grid-template-rows: 115px auto auto auto auto;
+                grid-template-areas: "h h h h h h h h h h h h""i i i i i i i i i i i i""p p p p p p p p p p p p""c c c c c c c c c c c c""f f f f f f f f f f f f"
+            }
+        }
+
+        .page {
+            margin-top: 30px;
+            margin-bottom: 70px;
+            grid-column: 3/11
+        }
+
+        @media only screen and (max-width:768px) {
+            .page {
+                margin-top: 30px;
+                margin-bottom: 70px;
+                grid-column: 1/-1
+            }
+        }
+
+        header {
+            grid-area: h;
+            display: flex;
+            margin-right: -15px
+        }
+
+        .logo {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 115px;
+            margin-right: 30px
+        }
+
+        .logo>p {
+            white-space: nowrap;
+            display: flex;
+            font-weight: bold;
+            margin-left: 15px
+        }
+
+        @media only screen and (max-width:768px) {
+            .logo {
+                height: 80px;
+                margin-right: 0px
+            }
+
+            .logo>p {
+                display: none
+            }
+        }
+
+        .headerIcon {
+            width: 50px;
+            height: 50px;
+            -webkit-clip-path: url(#shape);
+            clip-path: url(#shape)
+        }
+
+        @media only screen and (max-width:768px) {
+            .divider {
+                position: relative;
+                min-width: 1px;
+                max-width: 1px;
+                background-color: rgba(127, 127, 127, 0.2);
+                display: inline-block;
+                margin-left: 15px
+            }
+        }
+
+        .scroll {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: flex-end;
+            height: 115px;
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar
+        }
+
+        @media only screen and (max-width:768px) {
+            .scroll {
+                height: 80px;
+                padding-top: 100px;
+                padding-bottom: 100px;
+                margin-top: -60px;
+                justify-content: flex-start
+            }
+        }
+
+        .scroll::-webkit-scrollbar {
+            display: none
+        }
+
+        nav>ul {
+            color: #fff;
+            display: flex;
+            list-style-type: none
+        }
+
+        nav>ul li {
+            padding-left: 30px
+        }
+
+        @media only screen and (max-width:768px) {
+            nav>ul li {
+                padding-left: 20px
+            }
+        }
+
+        nav>ul li:first-child {
+            padding-left: 0px;
+            padding-left: 15px
+        }
+
+        nav>ul li:last-child {
+            padding-right: 15px
+        }
+
+        nav>ul li a:link,
+        nav>ul li a:visited {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6)
+        }
+
+        nav>ul li a:hover,
+        nav>ul li a:active {
+            text-decoration: none;
+            color: #fff
+        }
+
+        .subPageHeaderBackground .logo>p {
+            color: #000
+        }
+
+        .subPageHeaderBackground nav>ul li a:link,
+        .subPageHeaderBackground nav>ul li a:visited {
+            color: rgba(0, 0, 0, 0.6)
+        }
+
+        .subPageHeaderBackground nav>ul li a:hover,
+        .subPageHeaderBackground nav>ul li a:active {
+            color: #000
+        }
+
+        .appIconShadow {
+            display: flex;
+            filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.1)) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.2))
+        }
+
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3 {
+            color: #000
+        }
+
+        .markdown-body {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            color: rgba(0, 0, 0, 0.8);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+            line-height: 1.5;
+            word-wrap: break-word
+        }
+
+        .markdown-body h1 {
+            margin: .67em 0
+        }
+
+        .markdown-body * {
+            box-sizing: border-box
+        }
+
+        .markdown-body strong {
+            font-weight: 600
+        }
+
+        .markdown-body table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .markdown-body:before {
+            content: "";
+            display: table
+        }
+
+        .markdown-body:after {
+            clear: both;
+            content: "";
+            display: table
+        }
+
+        .markdown-body>:first-child {
+            margin-top: 0 !important
+        }
+
+        .markdown-body>:last-child {
+            margin-bottom: 0 !important
+        }
+
+        .markdown-body ol,
+        .markdown-body p,
+        .markdown-body table,
+        .markdown-body ul {
+            margin-bottom: 16px;
+            margin-top: 0
+        }
+
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3 {
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            margin-top: 24px
+        }
+
+        .markdown-body h1 {
+            font-size: 2em
+        }
+
+        .markdown-body h1,
+        .markdown-body h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: .3em
+        }
+
+        .markdown-body h2 {
+            font-size: 1.5em
+        }
+
+        .markdown-body h3 {
+            font-size: 1.25em
+        }
+
+        .markdown-body ol,
+        .markdown-body ul {
+            padding-left: 2em
+        }
+
+        .markdown-body li+li {
+            margin-top: .25em
+        }
+
+        .markdown-body table {
+            display: block;
+            overflow: auto;
+            width: 100%
+        }
+
+        .markdown-body table th {
+            font-weight: 600
+        }
+
+        .markdown-body table td,
+        .markdown-body table th {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px
+        }
+
+        .markdown-body table tr {
+            background-color: #fff;
+            border-top: 1px solid #c6cbd1
+        }
+
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #f6f8fa
+        }
+    </style>
+    <link rel="shortcut icon" href="./assets/elza-circle.webp">
+    <link rel="canonical" href="https://emilbaehr.github.io/automatic-app-landing-page/privacypolicy/">
 </head>
 
 <body class="subPageBody">
@@ -34,67 +382,75 @@
             <header>
                 <div class="logo">
                     <div class="appIconShadow">
-
-
-                        <a href="../" target="_self"><img class="headerIcon" src="./assets/elza-circle.webp"></a>
-
+                        <svg width="0" height="0">
+                            <defs>
+                                <clippath id="shape">
+                                    <path id="shape" class="cls-1"
+                                        d="M6181.23,233.709v-1.792c0-.5-0.02-1-0.02-1.523a24.257,24.257,0,0,0-.28-3.3,11.207,11.207,0,0,0-1.04-3.132,10.683,10.683,0,0,0-1.95-2.679,10.384,10.384,0,0,0-2.68-1.943,10.806,10.806,0,0,0-3.13-1.038,19.588,19.588,0,0,0-3.3-.285c-0.5-.017-1-0.017-1.52-0.017h-22.39c-0.51,0-1.01.017-1.53,0.017a24.041,24.041,0,0,0-3.3.285,11.009,11.009,0,0,0-3.13,1.038,10.491,10.491,0,0,0-4.62,4.622,10.893,10.893,0,0,0-1.04,3.132,19.2,19.2,0,0,0-.28,3.3c-0.02.5-.02,1-0.02,1.523v22.392c0,0.5.02,1,.02,1.524a24.257,24.257,0,0,0,.28,3.3,10.9,10.9,0,0,0,1.04,3.132,10.491,10.491,0,0,0,4.62,4.622,11.04,11.04,0,0,0,3.13,1.038,19.891,19.891,0,0,0,3.3.285c0.51,0.017,1.01.017,1.53,0.017h22.39c0.5,0,1-.017,1.52-0.017a24.221,24.221,0,0,0,3.3-.285,10.836,10.836,0,0,0,3.13-1.038,10.408,10.408,0,0,0,2.68-1.943,10.683,10.683,0,0,0,1.95-2.679,11.217,11.217,0,0,0,1.04-3.132,20.257,20.257,0,0,0,.28-3.3c0.02-.5.02-1,0.02-1.524v-20.6h0Z"
+                                        transform="translate(-6131 -218)"></path>
+                                </clippath>
+                            </defs>
+                        </svg>
+                        <a href="https://emilbaehr.github.io/automatic-app-landing-page/" target="_self"><img
+                                class="headerIcon" src="./assets/elza-circle.webp"></a>
                         <div class="divider"></div>
                     </div>
-                    <p class="headerName"></p>
+                    <p class="headerName">Elza Browser</p>
                 </div>
                 <nav class="scroll">
                     <ul>
-
+                        <!--   <li><a href="https://emilbaehr.github.io/automatic-app-landing-page/changelog/"
+                                target="_self">What's New</a></li>
+                        <li><a href="https://emilbaehr.com/">Press Kit</a></li> -->
                     </ul>
                 </nav>
             </header>
             <article class="page markdown-body">
-                <p><strong>Last updated</strong><br />
-                    September 18 2020</p>
-                <br>
-                <br>
+                <p><strong>Last updated</strong><br>
+                    September 19 2020</p>
                 <h1 id="privacy-policy">Privacy Policy</h1>
-                <h4> Information Collection and Use</h4>
-                We do not collect any information from the user's browsing activity. For making the browser better we
-                may retain the inputs given during signup and feedback; including but not limited to email, name.
-
-                <h4> Log Data</h4>
-                We do not collect logs even in the case of errors and crashes. Hence, we highly appreciate your inputs
-                via feedback.
-
-                <h4> Cookies</h4>
-                We do not store any cookies.
-
-                <h4> Service Providers</h4>
-                Third-party services may have limited access to information in order to perform tasks assigned to them.
-                However, they are obligated not to disclose or use the information for any other purpose.
-
-                <h4> Security</h4>
-                Best possible measures are taken to protect any information we have.
-
-                <h4> Links to Other Sites</h4>
-                We have no control over and assume no responsibility for the content, privacy policy, or practices of
-                any third-party sites or services.
-
-                <h4> Children’s Privacy</h4>
-                We do not provide service to anyone under the age of 13. Any personal information shared by the child
-                will be deleted immediately upon notice.
-
-                <h4> Changes to This Privacy Policy</h4>
-                We may update our Privacy Policy from time to time. Latest changes will be visible on this page. This
-                policy is effective as of 18 Sept 2020.
-
-                <h4> Contact Us</h4>
-                If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at
-                team@elzabrowser.com.
-
+                <p>ExpertEvidence.Org built the Elza Browser as a Free app. This SERVICE is provided by Elza Browser at
+                    no cost and is intended for use as is.</p>
+                <p>This page is used to inform visitors regarding our policies with the collection, use, and disclosure
+                    of Personal Information if anyone decided to use our Service.
+                    If you choose to use our Service, then you agree to the collection and use of information in
+                    relation to this policy. We will not use or share your information with anyone except as described
+                    in this Privacy Policy. The terms used in this Privacy Policy have the same meanings as in our Terms
+                    and Conditions, which is accessible at Elza Browser unless otherwise defined in this Privacy Policy.
+                </p>
+                <p><br></p>
+                <h2>1. Information Collection and Use</h2>
+                <p>We do not collect any information from the user's browsing activity. For making the browser better we
+                    may retain the inputs given during signup and feedback; including but not limited to email, name.
+                </p>
+                <!-- <h3 id="11-information-from-third-parties">1.1 Information from third parties</h3>
+                <ul>
+                    <li></li>
+                </ul> -->
+                <h2>2. Log Data</h2>
+                <p>We do not collect logs even in the case of errors and crashes. Hence, we highly appreciate your
+                    inputs via feedback.</p>
+                <h2>3. Cookies</h2>
+                <p>We do not store any cookies.</p>
+                <h2>4. Service Providers</h2>
+                <p>Third-party services may have limited access to information in order to perform tasks assigned to
+                    them. However, they are obligated not to disclose or use the information for any other purpose.</p>
+                <h2>5. Security</h2>
+                <p>Best possible measures are taken to protect any information we have.</p>
+                <h2>6. Links to Other Sites</h2>
+                <p>We have no control over and assume no responsibility for the content, privacy policy, or practices of
+                    any third-party sites or services.</p>
+                <h2>7. Children's Privacy</h2>
+                <p>We do not provide service to anyone under the age of 13. Any personal information shared by the child
+                    will be deleted immediately upon notice.</p>
+                <h2>8. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. Latest changes will be visible on this page. This
+                    policy is effective as of 19 September 2020.</p>
+                <h2>9. Contact Us</h2>
+                <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at
+                    team@elzabrowser.com.</p>
             </article>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-
-
-
     </div>
 </body>
 
