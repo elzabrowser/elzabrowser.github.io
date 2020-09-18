@@ -542,6 +542,9 @@ footer {
   padding-bottom: 70px;
 }
 .footerLinks a {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 18px;
 }
 .footerLinks a:last-child {
   margin-right: 0px;
