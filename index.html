@@ -5,13 +5,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<base target="_blank">-->
     <base href="." target="_blank">
     <title class="pageTitle">Elza Browser</title>
-    <meta name="description" content="Write a short tagline for your app.">
+    <!-- Primary Meta Tags -->
+    <title>Elza Browser</title>
+    <meta name="title" content="Elza Browser">
+    <meta name="description"
+        content="Elza Browser is building a free and secure access point to the (entire) internet for all needs and empowering your right to stay anonymous if you choose to.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://elzabrowser.com/">
+    <meta property="og:title" content="Elza Browser">
+    <meta property="og:description" content="For a Truly Incognito Browsing Experience.">
+    <meta property="og:image" content="https://elzabrowser.com/assets/icon-meta.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@elzabrowser">
+    <meta name="twitter:url" content="https://elzabrowser.com/">
+    <meta name="twitter:image" content="https://elzabrowser.com/assets/icon-meta.png">
+    <meta name="twitter:title" content="Elza Browser" />
+    <meta name="twitter:description" content="For a Truly Incognito Browsing Experience.">
+    <meta name="twitter:app:country" content="IN">
+
+
     <link rel="shortcut icon" href="./assets/elza-circle.webp">
-    <!-- Smart App Banner -->
-    <meta name="apple-itunes-app" content="app-id=1234793120">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -307,11 +326,12 @@
                     }
                     this.signedUp = 'yes'
                     let s = new Date().toLocaleString();
-                    fetch('https://script.google.com/macros/s/AKfycbymVvmCCU_RE3EYickoB18gHAvCYH7xLw5OicA0HjHQciPn8V4/exec?email=' + this.email + '&timestamp=' + s)
+                    let os = this.getOS()
+                    let browser = this.getBrowser()
+                    fetch('https://script.google.com/macros/s/AKfycbymVvmCCU_RE3EYickoB18gHAvCYH7xLw5OicA0HjHQciPn8V4/exec?email=' + this.email + '&timestamp=' + s + '&browser=' + browser + '&os=' + os)
                         .then(stream => stream.json())
                         .then(data =>
                         {
-                            let os = this.getOS()
                             if (os == "Windows")
                             {
                                 window.location = 'https://github.com/elzabrowser/elza/releases/download/v0.1.15/ElzaBrowser.WebSetup.0.1.15.exe';
@@ -323,6 +343,22 @@
                         })
                         .catch(error => console.error(error))
 
+                },
+                getBrowser: function ()
+                {
+                    var test = function (regexp) { return regexp.test(window.navigator.userAgent) }
+                    switch (true)
+                    {
+                        case test(/edg/i): return "Microsoft Edge";
+                        case test(/trident/i): return "Microsoft Internet Explorer";
+                        case test(/firefox|fxios/i): return "Mozilla Firefox";
+                        case test(/opr\//i): return "Opera";
+                        case test(/ucbrowser/i): return "UC Browser";
+                        case test(/samsungbrowser/i): return "Samsung Browser";
+                        case test(/chrome|chromium|crios/i): return "Google Chrome";
+                        case test(/safari/i): return "Apple Safari";
+                        default: return "Other";
+                    }
                 },
                 getOS: function ()
                 {
