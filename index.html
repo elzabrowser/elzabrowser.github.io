@@ -142,7 +142,7 @@
                             </a>
 
                             <a v-bind:href="downloadLink.lin" target="_self"
-                                class="btn btn-dark download border-0 bg-transparent"><i class="fab fa-linux"
+                                class="btn btn-dark download border-0 bg-transparent"><i v-bind:class="getDistroIcon()"
                                     style="font-size: 30px;">
                                     <p class="os">
                                         LINUX
@@ -272,8 +272,7 @@
                     </div>
                 </div>
                 <footer>
-                    <p class="footerText">Made in Kerala 🏖️ with 🔥 <span
-                            style="color: rgb(218, 42, 42);font-size:larger">❣</span>
+                    <p class="footerText">Made in Kerala 🏖️ with 🔥 <span style="color: rgb(218, 42, 42);">❣</span>
                     </p>
                     <div class="footerIcons">
                         <a href="https://github.com/elzabrowser/elza/releases">
@@ -306,7 +305,7 @@
         var app = new Vue({
             el: '#app',
             data: {
-                signedUp: "no",
+                signedUp: "yes",
                 email: "",
                 downloadLink: { win: "", lin: "" },
                 failemailvalidation: false,
@@ -403,6 +402,13 @@
                     if (this.blacklisted.some(v => this.email.includes(v))) { return false }
                     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return re.test(String(email).toLowerCase());
+                },
+                getDistroIcon: function ()
+                {
+                    if (window.navigator.userAgent.includes("Ubuntu")) return "fab fa-ubuntu"
+                    if (window.navigator.userAgent.includes("Fedora")) return "fab fa-fedora"
+                    if (window.navigator.userAgent.includes("SUSE")) return "fab fa-suse"
+                    return "fab fa-linux"
                 }
             }
         })
