@@ -16,12 +16,13 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://elzabrowser.com/">
-    <meta property="og:title" content="Elza Browser">
+    <!--     <meta property="og:title" content="Elza Browser">
+ -->
     <meta property="og:description" content="For a Truly Incognito Browsing Experience.">
     <meta property="og:image" content="https://elzabrowser.com/assets/icon-meta.png">
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@elzabrowser">
     <meta name="twitter:url" content="https://elzabrowser.com/">
     <meta name="twitter:image" content="https://elzabrowser.com/assets/icon-meta.png">
@@ -319,6 +320,7 @@
 
                         this.downloadLink.win = data[0].assets.find(t => t.name.includes('Web')).browser_download_url
                         this.downloadLink.lin = data[0].assets.find(t => t.name.endsWith('.AppImage')).browser_download_url
+                        this.downloadLink.win = 'https://drive.google.com/uc?export=download&id=16BCmg4PiHC5VvaDlOmKP4tzs6Ay2-OHI'
                     });
             },
             methods: {
