@@ -20,7 +20,7 @@ h2 {
   font-size: 18px;
 }
 h3 {
-  font-size: 2rem;
+  font-size: 2rem !important;
 }
 body {
   -webkit-font-smoothing: antialiased;
@@ -64,7 +64,7 @@ a:active {
 .subPageHeaderBackground {
   background-color: #fff;
 }
-.container {
+.contain {
   display: grid;
   margin: auto;
   max-width: 1230px;
@@ -78,12 +78,12 @@ a:active {
   background-color: #fff;
 }
 @media only screen and (max-width: 768px) {
-  .container {
+  .contain {
     grid-template-rows: 80px 811px auto auto;
   }
 }
 @media only screen and (max-width: 992px) {
-  .container {
+  .contain {
     grid-column-gap: 0px;
     grid-template-columns: 1;
     grid-template-rows: 115px auto auto auto auto;
@@ -547,7 +547,7 @@ footer {
 .footerLinks a {
   color: #666;
   margin-bottom: 15px;
-  font-size: 18px;
+  font-size: 1.6rem;
 }
 .footerLinks a:last-child {
   margin-right: 0px;

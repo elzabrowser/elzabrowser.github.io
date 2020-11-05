@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="." target="_blank">
     <title class="pageTitle">Elza Browser</title>
     <!-- Primary Meta Tags -->
@@ -18,7 +18,7 @@
     <meta property="og:url" content="https://elzabrowser.com/">
     <!--     <meta property="og:title" content="Elza Browser">
  -->
-    <meta property="og:description" content="For a Truly Incognito Browsing Experience.">
+    <meta property="og:description" content="Fast, Private & Minimal Browser">
     <meta property="og:image" content="https://elzabrowser.com/assets/icon-meta.png">
 
     <!-- Twitter -->
@@ -27,20 +27,29 @@
     <meta name="twitter:url" content="https://elzabrowser.com/">
     <meta name="twitter:image" content="https://elzabrowser.com/assets/icon-meta.png">
     <meta name="twitter:title" content="Elza Browser" />
-    <meta name="twitter:description" content="For a Truly Incognito Browsing Experience.">
+    <meta name="twitter:description" content="Fast, Private & Minimal Browser">
     <meta name="twitter:app:country" content="IN">
 
 
     <link rel="shortcut icon" href="./assets/elza-circle.webp">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
         integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="./assets/styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./assets/styles/main.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SM53C0V28P"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -49,12 +58,18 @@
 
         gtag('config', 'G-SM53C0V28P');
     </script>
+
+    <style>
+        .dropdown-item:active {
+            background-color: #c9cbcc;
+        }
+    </style>
 </head>
 
 <body>
     <div class="imageWrapper">
         <div class="headerBackground">
-            <div class="container">
+            <div class="contain">
                 <header>
                     <div class="logo">
                         <div class="appIconShadow">
@@ -114,16 +129,20 @@
                     </div>
                     <div class="appDescriptionContainer">
                         <p class="appDescription">
-                            For a Truly Incognito Browsing Experience.
+                            Fast, Private & Minimal Browser
                         </p>
 
                     </div>
-
-                    <div id="app" v-cloak class="mt-5 pt-3" style="width: 100%;">
-                        <div class="text-center">
+                    <div id="app" v-cloak class="text-center" style="width: 100%;">
+                        <a type="button" v-bind:class="dlbutton" v-bind:href="downloadLink.auto" target="_self"
+                            style="font-weight: 300; font-size: 18px;border-radius: 26px;padding-left: 15px;background-color: #e6e6e6;color: black;padding-top: 10px;padding-bottom: 10px;padding-left: 20px;padding-right: 20px;">
+                            <i v-bind:class="downloadIcon"
+                                style="font-size: 23px;vertical-align: middle;margin-bottom: 2px;">
+                            </i>&nbsp;&nbsp;{{downloadText}}</a>
+                        <div class="pt-5 text-center">
                             <p class="earlyaccess"
                                 style="color: floralwhite;letter-spacing: 3px;font-size: 12px;font-weight: 400;text-align: center;">
-                                DOWNLOAD FOR
+                                AVAILABLE FOR
                             </p>
 
                             <a v-bind:href="downloadLink.win" target="_self"
@@ -170,7 +189,6 @@
                             <p>
                                 Source code of Elza Browser is available at <a
                                     href="https://github.com/elzabrowser/elza">Github</a> under the GPvL3 license.
-                                Contributions are always welcome.
                             </p>
                         </div>
                     </div>
@@ -288,10 +306,10 @@
                     <div class="footerLinks">
                         <!-- <a href=""
                             target="_self">What's New</a> -->
-                        <a href="https://rzp.io/l/elzabrowser">Keep this
+                        <a style="padding-left: 10px;padding-right: 10px;" href="https://rzp.io/l/elzabrowser">Keep this
                             Project Alive</a>
-                        <br style="display: block;margin: px 0;">
-                        <a href="./privacypolicy.html" target="_self">Privacy
+                        <a style="padding-left: 10px;padding-right: 10px;" href="./privacypolicy.html"
+                            target="_self">Privacy
                             Policy</a>
                     </div>
                 </footer>
@@ -302,53 +320,52 @@
         var app = new Vue({
             el: '#app',
             data: {
-                downloadLink: { win: "", lin: "", mac: "" }
+                downloadText: "Download for Windows",
+                downloadIcon: "fab fa-windows",
+                dlbutton: "mt-5 btn btn-secondary btn-lg",
+                downloadLink: { win: "", lin: "", mac: "", auto: "" }
             },
             created()
             {
+                let os = this.getOS()
+                if (os == "Windows")
+                {
+                    this.downloadText = "Download for Windows"
+                    this.downloadIcon = "fab fa-windows"
+                } else if (os == "Linux")
+                {
+                    this.downloadText = "Download for Linux"
+                    this.downloadIcon = this.getDistroIcon()
+                } else if (os == "Mac")
+                {
+                    this.downloadText = "Download for Mac"
+                    this.downloadIcon = "fa fa-apple"
+                }
                 fetch('https://api.github.com/repos/elzabrowser/elza/releases').then(stream => stream.json())
                     .then(data =>
                     {
-
                         this.downloadLink.win = data[0].assets.find(t => t.name.includes('Web')).browser_download_url
                         this.downloadLink.lin = data[0].assets.find(t => t.name.endsWith('.AppImage')).browser_download_url
                         this.downloadLink.mac = data[0].assets.find(t => t.name.endsWith('.dmg')).browser_download_url
+                        let os = this.getOS()
+                        if (os == "Windows")
+                        {
+                            this.downloadLink.auto = this.downloadLink.win
+                        } else if (os == "Linux")
+                        {
+                            this.downloadLink.auto = this.downloadLink.lin
+                        } else if (os == "Mac")
+                        {
+                            this.downloadLink.auto = this.downloadLink.mac
+                        } else
+                        {
+                            this.downloadLink.auto = this.downloadLink.win
+                            this.dlbutton = "d-none"
+                        }
                     });
             },
             methods: {
-                submit: function ()
-                {
-                    let os = this.getOS()
-                    let browser = this.getBrowser()
-                    if (os == "Windows")
-                    {
-                        window.location = this.downloadLink.win
 
-                    } else if (os == "Linux")
-                    {
-                        window.location = this.downloadLink.lin
-                    } else if (os == "Mac")
-                    {
-                        window.location = this.downloadLink.mac
-                    }
-
-                },
-                getBrowser: function ()
-                {
-                    var test = function (regexp) { return regexp.test(window.navigator.userAgent) }
-                    switch (true)
-                    {
-                        case test(/edg/i): return "Microsoft Edge";
-                        case test(/trident/i): return "Microsoft Internet Explorer";
-                        case test(/firefox|fxios/i): return "Mozilla Firefox";
-                        case test(/opr\//i): return "Opera";
-                        case test(/ucbrowser/i): return "UC Browser";
-                        case test(/samsungbrowser/i): return "Samsung Browser";
-                        case test(/chrome|chromium|crios/i): return "Google Chrome";
-                        case test(/safari/i): return "Apple Safari";
-                        default: return "Other";
-                    }
-                },
                 getOS: function ()
                 {
                     var userAgent = window.navigator.userAgent,
