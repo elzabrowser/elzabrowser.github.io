@@ -340,7 +340,9 @@
                 {
                     this.downloadText = "Download for Mac"
                     this.downloadIcon = "fa fa-apple"
-                }
+                } else
+                    this.dlbutton = "d-none"
+
                 fetch('https://api.github.com/repos/elzabrowser/elza/releases').then(stream => stream.json())
                     .then(data =>
                     {
@@ -360,7 +362,6 @@
                         } else
                         {
                             this.downloadLink.auto = this.downloadLink.win
-                            this.dlbutton = "d-none"
                         }
                     });
             },
