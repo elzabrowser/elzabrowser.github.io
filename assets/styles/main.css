@@ -308,8 +308,18 @@ nav > ul li a:active {
   font-size: 22px;
   color: #fff;
   font-weight: 300;
+  letter-spacing: 1.5px;
   /*   text-align: center;
  */
+}
+.earlyaccess {
+  text-align: center;
+  text-transform: uppercase;
+  color: floralwhite;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
 }
 @media only screen and (max-width: 992px) {
   .appDescription {
@@ -317,10 +327,6 @@ nav > ul li a:active {
     font-weight: 300;
 
     text-align: center;
-  }
-  .earlyaccess {
-    text-align: center;
-    
   }
 }
 .downloadButtonsContainer {
@@ -612,15 +618,15 @@ footer {
   background-color: transparent;
   outline: none;
   height: 30px;
-  font-size: 12px;
   border: 0;
   width: 100%;
   letter-spacing: 2px;
   padding-left: 10px;
   padding-right: 110px;
+  font-weight: 400;
+  font-size: 13px;
 }
 .search-button {
-  font-weight: 100;
   font-size: 12px;
   position: absolute;
   right: 4px;
@@ -633,6 +639,16 @@ footer {
   width: 130px;
   height: 32px;
   outline: none !important;
+  font-weight: 600;
+}
+.shortlink {
+  text-decoration: underline;
+  cursor: pointer;
+  color: floralwhite;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
 }
 button:focus {
   outline: none !important;
@@ -645,4 +661,60 @@ button:focus {
   text-align: center;
   margin-top: 5px;
   font-family: 'Roboto';
+}
+.dropdown-item:active {
+  background-color: #c9cbcc;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400|Roboto:100);
+
+.countdown {
+  display: flex;
+}
+
+.block {
+  flex-direction: column;
+}
+
+.text {
+  color: floralwhite;
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 0px;
+  text-align: center;
+}
+
+.digit {
+  color: floralwhite;
+  font-size: 6rem;
+  font-weight: 100;
+  font-family: 'Roboto';
+  margin: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+@media only screen and (max-width: 528px) {
+  .digit {
+    font-size: 1.9em;
+  }
+  .text{
+    font-size: 15px;
+  }
+}
+.card {
+  background-color: white;
+  border-bottom: 0px solid rgb(211, 211, 211) !important;
+  margin-top: 15px;
+  margin-bottom: 15px !important;
+  
+}
+.card-header{
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+.card-body{
+  color: #666;
+  font-weight: 300;
+  padding-left: 0;
 }
