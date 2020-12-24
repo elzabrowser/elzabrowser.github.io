@@ -5,9 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="." target="_blank">
     <title class="pageTitle">Elza Browser</title>
-    <!-- Primary Meta Tags -->
     <title>Elza Browser</title>
     <meta name="title" content="Elza Browser">
     <meta name="description"
@@ -16,8 +14,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://elzabrowser.com/">
-    <!--     <meta property="og:title" content="Elza Browser">
- -->
+    <!--<meta property="og:title" content="Elza Browser"> -->
     <meta property="og:description" content="Fast, Private & Minimal Browser">
     <meta property="og:image" content="https://elzabrowser.com/assets/icon-meta.png">
 
@@ -33,6 +30,7 @@
 
     <link rel="shortcut icon" href="./assets/elza-circle.webp">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
         integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
         crossorigin="anonymous" />
@@ -62,6 +60,35 @@
     <style>
         .dropdown-item:active {
             background-color: #c9cbcc;
+        }
+
+        @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400|Roboto:100);
+
+
+        .countdown {
+            display: flex;
+        }
+
+        .block {
+            flex-direction: column;
+        }
+
+        .text {
+            color: floralwhite;
+            font-size: 18px;
+            font-weight: 300;
+            margin-top: 0px;
+            text-align: center;
+        }
+
+        .digit {
+            color: floralwhite;
+            font-size: 60px;
+            font-weight: 100;
+            font-family: "Roboto", serif;
+            margin: 14px;
+            margin-bottom: 0;
+            text-align: center;
         }
     </style>
 </head>
@@ -133,7 +160,7 @@
                         </p>
 
                     </div>
-                    <div id="app" v-cloak class="mt-5 pt-3" style="width: 100%;">
+                    <div id="app" v-cloak class="mt-0 pt-0" style="width: 100%;">
                         <div v-if="accessComponent=='invite'">
                             <p class="earlyaccess"
                                 style="text-transform: uppercase;color: floralwhite;letter-spacing: 3px;font-size: 12px;font-weight: 400;text-align: center;">
@@ -142,7 +169,7 @@
                             <div class="search-container" v-bind:class="{ emailerror: failemailvalidation }">
                                 <input v-model="invitecode" type="text" style="font-weight: 400;font-size: 13px;"
                                     class="search-box" placeholder="INVITE CODE">
-                                <button v-on:click="checkinvitecode" style="font-weight: 600;" class="search-button">
+                                <button v-on:click="checkinvitecode()" style="font-weight: 600;" class="search-button">
                                     <i v-if="serverdelay==true" class="spinner-border text-light"></i>
                                     <span v-else>GET ELZA</span></button>
                             </div>
@@ -170,7 +197,8 @@
                                 <p class="earlyaccess pt-5"
                                     style="text-transform: uppercase; cursor: pointer; color: floralwhite;letter-spacing: 1px;font-size: 12px;font-weight: 400;text-align: center;">
                                     <span v-if="waitlistjoined">thanks! <br> we will notify you when downloads are
-                                        available for you.</span> </p>
+                                        available for you.</span>
+                                </p>
                             </div>
                         </div>
 
@@ -213,6 +241,26 @@
                                 style="text-transform: uppercase; color: floralwhite;letter-spacing: 1px;font-size: 12px;font-weight: 500;text-align: center;">
                                 <span style="letter-spacing: 2px;font-size: 16px;font-weight: 700;">{{newcode}}</span>
                             </p>
+                        </div>
+                        <div v-if="accessComponent=='counter'" class="mt-0 m-5">
+                            <div class="countdown">
+                                <div class="block">
+                                    <p class="digit">{{ days | two_digits }}</p>
+                                    <p class="text">Days</p>
+                                </div>
+                                <div class="block">
+                                    <p class="digit">{{ hours | two_digits }}</p>
+                                    <p class="text">Hours</p>
+                                </div>
+                                <div class="block">
+                                    <p class="digit">{{ minutes | two_digits }}</p>
+                                    <p class="text">Minutes</p>
+                                </div>
+                                <div class="block">
+                                    <p class="digit">{{ seconds | two_digits }}</p>
+                                    <p class="text">Seconds</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -362,8 +410,10 @@
         var app = new Vue({
             el: '#app',
             data: {
-                accessComponent: "invite",
+                accessComponent: "counter",
                 email: "",
+                date: "2021-01-01 00:00:00",
+                now: Math.trunc(new Date().getTime() / 1000),
                 invitecode: "",
                 serverdelay: false,
                 newcode: "",
@@ -375,6 +425,10 @@
             },
             created()
             {
+                let uri = window.location.search.substring(1);
+                let params = new URLSearchParams(uri);
+                console.log(params.get("test"));
+                this.checkinvitecode(params.get("invitecode"))
                 fetch('https://api.github.com/repos/elzabrowser/elza/releases').then(stream => stream.json())
                     .then(data =>
                     {
@@ -384,9 +438,23 @@
                         this.downloadLink.mac = data[0].assets.find(t => t.name.endsWith('.dmg')).browser_download_url
                     });
             },
-            methods: {
-                checkinvitecode: function ()
+            mounted()
+            {
+                window.setInterval(() =>
                 {
+                    this.now = Math.trunc(new Date().getTime() / 1000);
+                }, 1000);
+            },
+            methods: {
+                checkinvitecode: function (querycode)
+                {
+                    console.log(querycode)
+                    if (this.accessComponent == 'counter')
+                        if (querycode === undefined || querycode === null) return
+                        else
+                            this.invitecode = querycode
+                    this.accessComponent = 'invite'
+                    console.log('hhh')
                     this.serverdelay = true
                     fetch('https://api.expertevidence.org/invitecodes?invitecode=' + this.invitecode)
                         .then(resp => resp.text()).then(text =>
@@ -500,6 +568,49 @@
                     if (window.navigator.userAgent.includes("Fedora")) return "fab fa-fedora"
                     if (window.navigator.userAgent.includes("SUSE")) return "fab fa-suse"
                     return "fab fa-linux"
+                },
+                data()
+                {
+                    return {
+                        now: Math.trunc(new Date().getTime() / 1000)
+                    };
+
+                }
+            },
+            computed: {
+                dateInMilliseconds()
+                {
+                    return Math.trunc(Date.parse(this.date) / 1000);
+                },
+                seconds()
+                {
+                    return (this.dateInMilliseconds - this.now) % 60;
+                },
+                minutes()
+                {
+                    return Math.trunc((this.dateInMilliseconds - this.now) / 60) % 60;
+                },
+                hours()
+                {
+                    return Math.trunc((this.dateInMilliseconds - this.now) / 60 / 60) % 24;
+                },
+                days()
+                {
+                    return Math.trunc((this.dateInMilliseconds - this.now) / 60 / 60 / 24);
+                }
+            },
+            filters: {
+                two_digits: function (value)
+                {
+                    if (value < 0)
+                    {
+                        return '00';
+                    }
+                    if (value.toString().length <= 1)
+                    {
+                        return `0${value}`;
+                    }
+                    return value;
                 }
             }
         })
