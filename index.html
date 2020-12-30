@@ -107,43 +107,51 @@
                         <h2 class="appPrice">Free for Windows, Mac & Linux</h2>
                     </div>
                     <div class="appDescriptionContainer">
-                        <p class="appDescription">
+                        <p class="appDescription mb-0">
                             No Nonsense Web Browser
                         </p>
-                        <p class="earlyaccess" style="text-transform: none;font-size: 14px;letter-spacing: 1.2px;">Fast,
+                        <p class="earlyaccess pb-4" style="text-transform: none;font-size: 14px;letter-spacing: 1.2px;">
+                            Fast,
                             Private & Minimal</p>
                     </div>
                     <div id="app" v-cloak class="mt-0 pt-0 w-100">
                         <div v-if="currentComponent=='invite'">
                             <p class="earlyaccess">
-                                enter invide code for download options
+                                enter invite code for download options
                             </p>
                             <div class="search-container" v-bind:class="{ emailerror: failemailvalidation }">
-                                <input v-model="invitecode" type="text" class="search-box" placeholder="INVITE CODE">
+                                <input v-model="invitecode" @input="checkinput()" type="text" class="search-box"
+                                    placeholder="INVITE CODE" style="font-weight: 600;letter-spacing: 4px;">
                                 <button v-on:click="checkinvitecode()" class="search-button">
                                     <i v-if="serverdelay" class="spinner-border text-light"></i>
                                     <span v-else>GET ELZA</span></button>
                             </div>
                             <div>
-                                <p class="shortlink pt-5" v-on:click="currentComponent='waitlist'">
+                                <p class="shortlink pt-4" v-on:click="currentComponent='waitlist'">
                                     don't have the invite code?
                                 </p>
                             </div>
                         </div>
                         <div v-if="currentComponent=='waitlist'">
-                            <p class="earlyaccess">
+                            <p v-if="!waitlistjoined" class="earlyaccess">
                                 join waiting list
                             </p>
-                            <div class="search-container" v-bind:class="{ emailerror: failemailvalidation }">
+                            <div v-if="!waitlistjoined" class="search-container"
+                                v-bind:class="{ emailerror: failemailvalidation }">
                                 <input v-model="email" type="text" class="search-box" placeholder="EMAIL ADDRESS">
                                 <button v-on:click="joinwaitlist" class="search-button"><i v-if="serverdelay"
                                         class="spinner-border text-light"></i>
                                     <span v-else>JOIN</span></button>
                             </div>
                             <div>
-                                <p class="earlyaccess pt-5">
-                                    <span v-if="waitlistjoined">thanks! <br> we will notify you when downloads are
+                                <p v-if="waitlistjoined" class="earlyaccess">
+                                    <span>thanks! <br> we will notify you when downloads are
                                         available for you.</span>
+                                </p>
+                            </div>
+                            <div v-if="!waitlistjoined">
+                                <p class="shortlink pt-4" v-on:click="currentComponent='invite'">
+                                    having the invite code?
                                 </p>
                             </div>
                         </div>
@@ -185,7 +193,7 @@
                                 <span style="letter-spacing: 2px;font-size: 16px;font-weight: 700;">{{newcode}}</span>
                             </p>
                         </div>
-                        <div v-if="currentComponent=='counter'" class="mt-0 m-5">
+                        <div v-if="currentComponent=='counter'">
                             <div class="countdown justify-content-center">
                                 <div class="block">
                                     <p class="digit">{{ days | two_digits }}</p>
@@ -372,7 +380,8 @@
                                 <div class="card-body">
                                     We know, some might face issues in the installation. It's becasue we are yet to
                                     purchase code signing certificates which facilitates smooth installation especially
-                                    for the Mac's and Windows. <a href="https://rzp.io/l/elzabrowser">You can play a role here with your support</a>.
+                                    for the Mac's and Windows. <a href="https://rzp.io/l/elzabrowser">You can play a
+                                        role here with your support</a>.
                                 </div>
                             </div>
                         </div>
@@ -432,12 +441,22 @@
             },
             mounted()
             {
+                this.updateTime()
                 window.setInterval(() =>
                 {
-                    this.now = Math.trunc(new Date().getTime() / 1000);
+                    this.updateTime()
                 }, 1000);
             },
             methods: {
+                updateTime()
+                {
+
+                    let diff = this.dateInMilliseconds - this.now
+                    if (this.currentComponent != 'invite' && diff < 0)
+                        this.currentComponent = 'waitlist'
+                    this.now = Math.trunc(new Date().getTime() / 1000);
+
+                },
                 checkinvitecode: function (querycode)
                 {
                     console.log(querycode)
@@ -446,7 +465,6 @@
                         else
                             this.invitecode = querycode
                     this.currentComponent = 'invite'
-                    console.log('hhh')
                     this.serverdelay = true
                     fetch('https://api.expertevidence.org/invitecodes?invitecode=' + this.invitecode)
                         .then(resp => resp.text()).then(text =>
@@ -465,8 +483,15 @@
                                 this.currentComponent = 'downloads'
                             }
                             this.serverdelay = false
+                        }).catch(error =>
+                        {
+                            this.failemailvalidation = true
+                            this.serverdelay = false
+                            setTimeout(() =>
+                            {
+                                this.failemailvalidation = false
+                            }, 3000);
                         })
-
                 },
                 joinwaitlist: function ()
                 {
@@ -502,7 +527,15 @@
                                 window.location = this.downloadLink.mac
                             }
                         })
-                        .catch(error => console.error(error))
+                        .catch(error =>
+                        {
+                            this.failemailvalidation = true
+                            setTimeout(() =>
+                            {
+                                this.failemailvalidation = false
+
+                            }, 3000);
+                        })
 
                 },
                 getBrowser: function ()
@@ -567,9 +600,14 @@
                         now: Math.trunc(new Date().getTime() / 1000)
                     };
 
+                },
+                checkinput()
+                {
+                    if(this.invitecode=='ELZA')this.invitecode='ELZA-'
                 }
             },
             computed: {
+
                 dateInMilliseconds()
                 {
                     return Math.trunc(Date.parse(this.date) / 1000);
