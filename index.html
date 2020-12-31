@@ -186,11 +186,7 @@
                             </a>
                             <p class="earlyaccess pt-5"
                                 style="text-transform: uppercase; color: floralwhite;letter-spacing: 1px;font-size: 12px;font-weight: 500;text-align: center;">
-                                thanks for trying elza, YOUR INVITE CODE :
-                            </p>
-                            <p class="earlyaccess pt-1"
-                                style="text-transform: uppercase; color: floralwhite;letter-spacing: 1px;font-size: 12px;font-weight: 500;text-align: center;">
-                                <span style="letter-spacing: 2px;font-size: 16px;font-weight: 700;">{{newcode}}</span>
+                                thanks for trying elza
                             </p>
                         </div>
                         <div v-if="currentComponent=='counter'">
@@ -451,10 +447,16 @@
                 updateTime()
                 {
 
-                    let diff = this.dateInMilliseconds - this.now
-                    if (this.currentComponent != 'invite' && diff < 0)
-                        this.currentComponent = 'waitlist'
                     this.now = Math.trunc(new Date().getTime() / 1000);
+                    let diff = this.dateInMilliseconds - this.now
+                    if (diff > 0)
+                        this.currentComponent = 'counter'
+                    else
+                    {
+                        console.log(this.currentComponent)
+                        if((this.currentComponent =='counter'))
+                        this.currentComponent = 'waitlist'
+                    }
 
                 },
                 checkinvitecode: function (querycode)
@@ -466,7 +468,7 @@
                             this.invitecode = querycode
                     this.currentComponent = 'invite'
                     this.serverdelay = true
-                    fetch('https://api.expertevidence.org/invitecodes?invitecode=' + this.invitecode)
+                    fetch('http://localhost:3000/invite/?invitecode=' + this.invitecode)
                         .then(resp => resp.text()).then(text =>
                         {
                             if (text == 'false')
@@ -495,7 +497,7 @@
                 },
                 joinwaitlist: function ()
                 {
-                    if (!this.validateEmail(this.email))
+                    if (this.email == "")
                     {
                         this.failemailvalidation = true
                         setTimeout(() =>
@@ -509,12 +511,26 @@
                     let os = this.getOS()
                     let browser = this.getBrowser()
                     this.serverdelay = true
-                    fetch('http://localhost:3000/waitlist/?email=' + this.email + '&timestamp=' + s + '&browser=' + browser + '&os=' + os)
-                        .then(stream => stream.json())
+                    let url = 'http://localhost:3000/waitlist/?email=' + this.email + '&timestamp=' + s + '&browser=' + browser + '&os=' + os
+                    console.log(url)
+                    fetch(url)
+                        .then(stream => stream.text())
                         .then(data =>
                         {
                             this.serverdelay = false
-                            this.waitlistjoined = true
+                            console.log(data)
+                            if (data == 'true')
+                            {
+                                this.waitlistjoined = true
+                            } else
+                            {
+                                this.failemailvalidation = true
+                                setTimeout(() =>
+                                {
+                                    this.failemailvalidation = false
+
+                                }, 3000);
+                            }/*
                             if (os == "Windows")
                             {
                                 window.location = this.downloadLink.win
@@ -525,7 +541,7 @@
                             } else if (os == "Mac")
                             {
                                 window.location = this.downloadLink.mac
-                            }
+                            }*/
                         })
                         .catch(error =>
                         {
@@ -603,7 +619,7 @@
                 },
                 checkinput()
                 {
-                    if(this.invitecode=='ELZA')this.invitecode='ELZA-'
+                    if (this.invitecode == 'ELZA') this.invitecode = 'ELZA-'
                 }
             },
             computed: {
