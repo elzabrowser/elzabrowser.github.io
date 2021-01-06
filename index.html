@@ -110,8 +110,7 @@
                         <p class="appDescription mb-0">
                             No Nonsense Web Browser
                         </p>
-                        <p class="earlyaccess pb-5 mb-2"
-                            style="text-transform: none;font-size: 14px;letter-spacing: 1.2px;">
+                        <p class="earlyaccess pb-5 mb-2" style="font-size: 14px;letter-spacing: 1.2px;">
                             Fast,
                             Private & Minimal</p>
                     </div>
@@ -156,14 +155,11 @@
                             </div>
                         </div>
                         <div v-if="currentComponent=='downloads'" class="text-center">
-                            <a type="button" v-bind:class="dlbutton" v-bind:href="downloadLink.auto" target="_self"
-                                style="font-weight: 300; font-size: 18px;border-radius: 26px;padding-left: 15px;background-color: #e6e6e6;color: black;padding-top: 10px;padding-bottom: 10px;padding-left: 20px;padding-right: 20px;">
-                                <i v-bind:class="downloadIcon"
-                                    style="font-size: 23px;vertical-align: middle;margin-bottom: 2px;">
+                            <a v-if="dlbuttonvisible" type="button" class="dlbutton btn btn-secondary btn-lg"
+                                v-bind:href="downloadLink.auto" target="_self"> <i class="downloadIcon" v-bind:class="downloadIcon">
                                 </i>&nbsp;&nbsp;{{downloadText}}</a>
 
-                            <p class="earlyaccess pt-5"
-                                style="color: floralwhite;letter-spacing: 3px;font-size: 12px;font-weight: 400;text-align: center;">
+                            <p class="earlyaccess pt-5">
                                 AVAILABLE FOR
                             </p>
                             <a v-bind:href="downloadLink.win" target="_self"
@@ -190,8 +186,7 @@
                                     </p>
                                 </i>
                             </a>
-                            <p class="earlyaccess pt-5"
-                                style="text-transform: uppercase; color: floralwhite;letter-spacing: 1px;font-size: 12px;font-weight: 500;text-align: center;">
+                            <p class="earlyaccess pt-5">
                             </p>
                         </div>
                         <div v-if="currentComponent=='counter'">
@@ -326,11 +321,10 @@
                             <p> We do not ourselves or let others collect, view, store or process any of your data. </p>
                         </div>
                     </div>
-                    <div id="accordion" class="w-100 m-5 p-5" style="font-family: Roboto;">
-                        <div class="card" style="border:none;border-top: 0px solid rgb(211, 211, 211);" href="#whyelza">
-                            <a class="card-header" style="border:none;" href="#whyelza">
-                                <a class="card-title" style="color: black;" data-toggle="collapse" href="#whyelza"
-                                    style="font-family: Roboto;">
+                    <div id="accordion" class="w-100 m-5 p-5">
+                        <div class="card border-0" href="#whyelza">
+                            <a class="card-header border-0" href="#whyelza">
+                                <a class="card-title text-dark" data-toggle="collapse" href="#whyelza">
                                     Why Elza Browser? <i class="fas fa-angle-down float-right"></i>
                                 </a>
                             </a>
@@ -342,10 +336,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="border:none">
-                            <a class="card-header" style="border:none;" href="#whenelza">
-                                <a class="collapsed card-link" style="color: black;" data-toggle="collapse"
-                                    href="#whenelza">
+                        <div class="card border-0">
+                            <a class="card-header border-0" href="#whenelza">
+                                <a class="collapsed card-link text-dark" data-toggle="collapse" href="#whenelza">
                                     When should I use Elza? <i class="fas fa-angle-down float-right"></i>
                                 </a>
                             </a>
@@ -357,10 +350,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="border:none">
-                            <a class="card-header" style="border:none" href="#isfree">
-                                <a class="collapsed card-link" style="color: black;" data-toggle="collapse"
-                                    href="#isfree">
+                        <div class="card border-0">
+                            <a class="card-header border-0" href="#isfree">
+                                <a class="collapsed card-link text-dark" data-toggle="collapse" href="#isfree">
                                     Is it free? <i class="fas fa-angle-down float-right"></i>
                                 </a>
                             </a>
@@ -370,10 +362,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="border:none">
-                            <a class="card-header" style="border:none" href="#hiccup">
-                                <a class="collapsed card-link" style="color: black;" data-toggle="collapse"
-                                    href="#hiccup">
+                        <div class="card border-0">
+                            <a class="card-header border-0" href="#hiccup">
+                                <a class="collapsed card-link text-dark" data-toggle="collapse" href="#hiccup">
                                     Did you find any hiccup while downloading Elza? <i
                                         class="fas fa-angle-down float-right"></i>
                                 </a>
@@ -427,7 +418,7 @@
                 failemailvalidation: false,
                 downloadText: "Download for Windows",
                 downloadIcon: "fab fa-windows",
-                dlbutton: " btn btn-secondary btn-lg"
+                dlbuttonvisible: true
             },
             created()
             {
@@ -446,9 +437,9 @@
                 } else if (os == "Mac")
                 {
                     this.downloadText = "Download for Mac"
-                    this.downloadIcon = "fa fa-apple"
+                    this.downloadIcon = "fab fa-apple"
                 } else
-                    this.dlbutton = "d-none"
+                    this.dlbuttonvisible = false
 
                 fetch('https://api.github.com/repos/elzabrowser/elza/releases').then(stream => stream.json())
                     .then(data =>
@@ -474,6 +465,7 @@
             },
             mounted()
             {
+                this.currentComponent = 'invite'
                 this.updateTime()
                 window.setInterval(() =>
                 {
@@ -486,13 +478,6 @@
 
                     this.now = Math.trunc(new Date().getTime() / 1000);
                     let diff = this.dateInMilliseconds - this.now
-                    if (diff > 0)
-                        this.currentComponent = 'counter'
-                    else
-                    {
-                        if ((this.currentComponent == 'counter'))
-                            this.currentComponent = 'invite'
-                    }
 
                 },
                 checkinvitecode: function (querycode)
@@ -503,7 +488,7 @@
                             this.invitecode = querycode
                     this.currentComponent = 'invite'
                     this.serverdelay = true
-                    fetch('https://api.expertevidence.org/elza-apis/invite/?invitecode=' + this.invitecode)
+                    fetch('https://elza-invitecodes-api-e4ut767a4a-el.a.run.app/elza-apis/invite/?invitecode=' + this.invitecode)
                         .then(resp => resp.text()).then(text =>
                         {
                             if (text == 'false')
@@ -546,7 +531,7 @@
                     let os = this.getOS()
                     let browser = this.getBrowser()
                     this.serverdelay = true
-                    let url = 'https://api.expertevidence.org/elza-apis/waitlist/?email=' + this.email + '&timestamp=' + s + '&browser=' + browser + '&os=' + os
+                    let url = 'https://elza-invitecodes-api-e4ut767a4a-el.a.run.app/elza-apis/waitlist/?email=' + this.email + '&timestamp=' + s + '&browser=' + browser + '&os=' + os
                     fetch(url)
                         .then(stream => stream.text())
                         .then(data =>

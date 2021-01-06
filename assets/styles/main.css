@@ -542,18 +542,17 @@ footer {
   line-height: 1.5;
   width: 100%;
   text-align: center;
-  padding-top: 50px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 .footerIcons {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   display: flex;
   flex: 0 0 100%;
   justify-content: center;
 }
 .footerLinks {
   text-align: center;
-  padding-bottom: 70px;
+  padding-bottom: 20px;
 }
 .footerLinks a {
   color: #666;
@@ -583,11 +582,10 @@ footer {
     line-height: 1.5;
     width: 100%;
     text-align: center;
-    padding-top: 54px;
-    padding-bottom: 61px;
+    padding-bottom: 20px;
   }
   .footerIcons {
-    padding-bottom: 70px;
+    padding-bottom: 20px;
     display: flex;
   }
 }
@@ -698,7 +696,7 @@ button:focus {
   .digit {
     font-size: 1.9em;
   }
-  .text{
+  .text {
     font-size: 15px;
   }
 }
@@ -707,14 +705,33 @@ button:focus {
   border-bottom: 0px solid rgb(211, 211, 211) !important;
   margin-top: 15px;
   margin-bottom: 15px !important;
-  
 }
-.card-header{
+.card-header {
   background-color: white;
   border-bottom: 1px solid black;
 }
-.card-body{
+.card-body {
   color: #666;
   font-weight: 300;
   padding-left: 0;
+}
+.dlbutton {
+  font-weight: 300;
+  font-size: 18px;
+  border-radius: 26px;
+  padding-left: 15px;
+  background-color: #e6e6e6;
+  color: black !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.dlbutton:hover {
+  background-color: #e6e6e6 !important;
+}
+.downloadIcon {
+  font-size: 23px;
+  vertical-align: middle;
+  margin-bottom: 2px;
 }
