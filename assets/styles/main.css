@@ -735,3 +735,6 @@ button:focus {
   vertical-align: middle;
   margin-bottom: 2px;
 }
+.tooltip{
+  font-size: 1.3rem;
+}

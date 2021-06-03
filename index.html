@@ -42,6 +42,10 @@
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-SM53C0V28P');
+        $(function ()
+        {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 </head>
 
@@ -156,7 +160,8 @@
                         </div>
                         <div v-if="currentComponent=='downloads'" class="text-center">
                             <a v-if="dlbuttonvisible" type="button" class="dlbutton btn btn-secondary btn-lg"
-                                v-bind:href="downloadLink.auto" target="_self"> <i class="downloadIcon" v-bind:class="downloadIcon">
+                                v-bind:href="downloadLink.auto" target="_self"> <i class="downloadIcon"
+                                    v-bind:class="downloadIcon">
                                 </i>&nbsp;&nbsp;{{downloadText}}</a>
 
                             <p class="earlyaccess pt-5">
@@ -179,8 +184,9 @@
                                 </i>
                             </a>
                             <a v-bind:href="downloadLink.mac" target="_self"
-                                class="btn btn-dark download border-0 bg-transparent"><i class="fab fa-apple"
-                                    style="font-size: 30px;">
+                                class="btn btn-dark download border-0 bg-transparent" data-toggle="tooltip"
+                                title="Mac version is currently experimental."><i class="fab fa-apple"
+                                    style="font-size: 30px; color: grey;">
                                     <p class="os">
                                         MAC OS
                                     </p>
@@ -321,6 +327,38 @@
                             <p> We do not ourselves or let others collect, view, store or process any of your data. </p>
                         </div>
                     </div>
+                    <div class="feature">
+                        <div>
+                            <span class="fa-stack fa-1x">
+                                <i class="iconBack fas fa-circle fa-stack-2x"></i>
+                                <i class="iconTop fas fa-user-shield fa-stack-1x"></i>
+                            </span>
+                        </div>
+                        <div class="featureText">
+                            <h3>
+                                Security
+                            </h3>
+                            <p>
+                                The browser has been sandboxed with no access to outside components.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div>
+                            <span class="fa-stack fa-1x">
+                                <i class="iconBack fas fa-circle fa-stack-2x"></i>
+                                <i class="iconTop fas fa-shield-alt fa-stack-1x"></i>
+                            </span>
+                        </div>
+                        <div class="featureText">
+                            <h3>
+                                Adblock
+                            </h3>
+                            <p>
+                                Efficient blocking of ads, trackers, and annoyances.
+                            </p>
+                        </div>
+                    </div>
                     <div id="accordion" class="w-100 m-5 p-5">
                         <div class="card border-0" href="#whyelza">
                             <a class="card-header border-0" href="#whyelza">
@@ -385,6 +423,12 @@
                     <p class="footerText">Made in Kerala 🏖️ with 🔥 <span class="text-danger">❣</span>
                     </p>
                     <div class="footerIcons">
+                        <a href="https://github.com/elzabrowser/elza">
+                            <span class="fa-stack fa-1x">
+                                <i class="socialIconBack fas fa-circle fa-stack-2x"></i>
+                                <i class="socialIconTop fab fa-github fa-stack-1x"></i>
+                            </span>
+                        </a>
                         <a href="mailto:team@elzabrowser.com">
                             <span class="fa-stack fa-1x">
                                 <i class="socialIconBack fas fa-circle fa-stack-2x"></i>
@@ -441,12 +485,12 @@
                 } else
                     this.dlbuttonvisible = false
 
-                fetch('https://api.github.com/repos/elzabrowser/elza/releases').then(stream => stream.json())
+                fetch('https://api.github.com/repos/elzabrowser/elza/releases/latest').then(stream => stream.json())
                     .then(data =>
                     {
-                        this.downloadLink.win = data[0].assets.find(t => t.name.includes('Web')).browser_download_url
-                        this.downloadLink.lin = data[0].assets.find(t => t.name.endsWith('.AppImage')).browser_download_url
-                        this.downloadLink.mac = data[0].assets.find(t => t.name.endsWith('.dmg')).browser_download_url
+                        this.downloadLink.win = data.assets.find(t => t.name.includes('Web')).browser_download_url
+                        this.downloadLink.lin = data.assets.find(t => t.name.endsWith('.AppImage')).browser_download_url
+                        this.downloadLink.mac = data.assets.find(t => t.name.endsWith('.dmg')).browser_download_url
                         let os = this.getOS()
                         if (os == "Windows")
                         {
@@ -465,7 +509,7 @@
             },
             mounted()
             {
-                this.currentComponent = 'invite'
+                this.currentComponent = 'downloads'
                 this.updateTime()
                 window.setInterval(() =>
                 {
